@@ -1,0 +1,52 @@
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
+#
+# SPDX-License-Identifier: MIT
+
+---
+name: Packages cleanup
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_dispatch:
+
+jobs:
+  delete-packages:
+    name: Delete old packages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/delete-package-versions@v5
+        if: always()
+        with:
+          package-name: 'ddc/doxygen'
+          package-type: 'container'
+          min-versions-to-keep: 1
+      - uses: actions/delete-package-versions@v5
+        if: always()
+        with:
+          package-name: 'ddc/latest_cpu'
+          package-type: 'container'
+          min-versions-to-keep: 1
+      - uses: actions/delete-package-versions@v5
+        if: always()
+        with:
+          package-name: 'ddc/latest_cuda'
+          package-type: 'container'
+          min-versions-to-keep: 1
+      - uses: actions/delete-package-versions@v5
+        if: always()
+        with:
+          package-name: 'ddc/latest_hip'
+          package-type: 'container'
+          min-versions-to-keep: 1
+      - uses: actions/delete-package-versions@v5
+        if: always()
+        with:
+          package-name: 'ddc/oldest_cpu'
+          package-type: 'container'
+          min-versions-to-keep: 1
+      - uses: actions/delete-package-versions@v5
+        if: always()
+        with:
+          package-name: 'ddc/oldest_hip'
+          package-type: 'container'
+          min-versions-to-keep: 1
